@@ -1,0 +1,58 @@
+Users:
+	1. Admin		
+		- Approving users
+		- Approving tournaments
+
+	2. Registered user
+		- Edits own profile
+		- Creates teams - TEAM MANAGER
+		- Adds users to the teams - TEAM MEMBERS
+		- Registeres own team to the tournament
+		- Creates tournament - TOURNAMENT MANAGER
+		- Fills tournaments parameters
+		- Approves tournament's players
+		- Starts tournament, generates schedule
+		- Fills tournament's players
+		- Participates in tournament
+		- Sees own fixtures
+		- Sees preferably own results
+
+	3. Unregistered user
+		- Shows players profiles
+		- Shows players statistics
+		- Shows tournaments results
+
+
+Sports:
+	- Chess
+	- Darts
+	- PC games
+	- Beer consumation
+	- Pingpong
+	- Billiard
+	- Table football
+	- Custom game
+
+Results:
+	- Spider form
+
+
+Database objects:
+		
+
+What to avoid:
+	- Person can be only once in same tournament
+
+Generating bracket:
+	- Get participants count
+	- Calculate how many rounds are needed
+	- Fill first participants in every match
+	- Then when all matches are busy at first place, fill second spots with remaining participants
+	- Then create all rounds above with empty participants spots 
+
+
+TODO:
+	Approves
+	Replace history and fixtures for each other
+	Filter by name
+

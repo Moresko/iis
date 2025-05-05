@@ -1,0 +1,133 @@
+/**
+ * Project: Studentske turnaje
+ * File: base.css
+ * Created: 25.10.2022
+ * Author: Jakub Kasem xkasem02@stud.fit.vutbr.cz
+ * 
+ * Description: Base settings for css
+ */
+
+ :root {
+    /* Setting global colors */
+    --color-primary: #ADFF45;
+    --color-secondary: #31C92E;
+    --color-ternary: #FFFFFF;
+    --color-background-base: #282828;
+    --color-unverified: #D25A5A;
+    --color-own: #C9B71B;
+    --color-stroke: #000000;
+    --color-red: #D25A5A;
+
+    --color-primary-lighter: #c4ff77;
+    --color-secondary-lighter: #50e14e;
+    --color-ternary-lighter: lightgray;
+    --color-background-base-lighter: #3b3b3b;
+
+    --font-family-primary: monospace;
+
+    --style-border: 0px solid var(--color-stroke);
+    --style-border-radius: 5px;
+    background: linear-gradient(180deg,
+            rgba(40, 40, 40, 1) 0%,
+            rgba(30, 30, 30, 0.62) 70%,
+            rgba(24, 24, 24, 0.8) 100%);
+    height: 100vh;
+    color: var(--color-ternary);
+}
+
+/* Setting comonents */
+:root .el-message-box {
+    --el-messagebox-title-color: var(--color-secondary);
+    --el-messagebox-content-color: var(--color-ternary);
+    --el-bg-color: var(--color-background-base);
+    --el-messagebox-border-radius: var(--style-border-radius);
+    --el-border-color-lighter: var(--color-background-base-lighter);
+}
+
+:root .el-button {
+    --el-button-bg-color: var(--color-primary);
+    --el-button-text-color: var(--color-background-base);
+    border: var(--style-border);
+    --el-button-hover-bg-color: var(--color-primary-lighter);
+    --el-button-hover-text-color: var(--color-stroke);
+    --el-button-hover-border-color: var(--style-border);
+}
+
+:root .el-switch__label {
+    --el-color-primary: var(--color-ternary);
+    --el-text-color-primary: var(--color-ternary-lighter);
+}
+
+:root .el-switch {
+    --el-switch-on-color: var(--color-primary);
+}
+
+.detailButton {
+    background-color: var(--color-primary);
+    margin: 1rem;
+    padding-inline: 1rem;
+    padding-block: 0.5rem;
+    color: var(--color-background-base);
+    text-align: center;
+    border: var(--style-border);
+    border-radius: var(--style-border-radius);
+    cursor: pointer;
+    font-family: var(--font-family-primary);
+    font-size: large;
+}
+
+.detailButton:hover {
+    background-color: var(--color-primary-lighter);
+}
+
+h2 {
+    font-family: var(--font-family-primary);
+}
+
+label {
+    font-family: var(--font-family-primary);
+}
+
+p {
+    font-family: var(--font-family-primary);
+}
+
+div {
+    font-family: var(--font-family-primary);
+}
+
+input {
+    font-family: var(--font-family-primary);
+}
+
+.smallBtnContentBox {
+    cursor: pointer;
+}
+
+.smallBtnContentBox:hover {
+    background-color: var(--color-secondary-lighter);
+}
+
+:root .el-dialog {
+    --el-dialog-bg-color: var(--color-background-base);
+    color: var(--color-ternary);
+}
+
+:root .el-dialog .el-dialog__body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+:root .el-dialog .el-dialog__body .span {
+    color: red;
+}
+
+:root .el-dialog .el-dialog__header {
+    --el-text-color-primary: var(--color-ternary);
+    --el-dialog-title-font-size: x-large;
+}
+
+:root .el-radio-button__inner {
+    width: 100%;
+}

@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0067)https://www.fit.vutbr.cz/study/courses/IIS/private/projekt/doc.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-2">
+    
+    <title>Projekt IIS</title>
+    <style type="text/css">
+    	table { border-collapse: collapse; }
+    	td, th { border: 1px solid black; padding: 0.3em 0.5em; text-align: left; }
+    	dt { font-weight: bold; margin-top: 0.5em; }
+    </style>
+</head>
+<body>
+
+<!-- Zkontrolujte prosím nastavení kódování v hlavičce dokumentu 
+     podle použitého editoru -->
+
+<h1>Studentske turnaje</h1> <!-- Nahradte názvem svého zadání -->
+
+<dl>
+	<dt>Autoři</dt>
+	<dd>Adam Dzurilla <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
+	    <a href="mailto:xdzuri00@stud.fit.vutbr.cz">xdzuri00@stud.fit.vutbr.cz</a> -
+		Api, niekolko stranok (napr. manage teams, bracket detail...)
+	</dd>
+	<dd>Jakub Kasem <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
+	    <a href="mailto:xkasem02@stud.fit.vutbr.cz">xkasem02@stud.fit.vutbr.cz</a> - 
+		Frontend - napr. Main window, tournament detail, autorizacia
+	</dd>
+  <dd>Martin Mores <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
+	    <a href="mailto:xmores02@stud.fit.vutbr.cz">xmores02@stud.fit.vutbr.cz</a> - 
+		Frontend - napr. login, register, edit tournament...
+	</dd>
+	<dt>URL aplikace</dt>
+	<dd><a href="https://www.stud.fit.vutbr.cz/~xdzuri00/">https://www.stud.fit.vutbr.cz/~xdzuri00/</a></dd>
+	<dd><p>Projekt sme neumiestnili na adresu IIS z dovodu ze tento projekt sme sa rozhodli pouzit aj do inych predmetov</p></dd>
+	<!-- <dd>(pokud má aplikace více vstupních stránek, napište obdobně další URL)</dd> -->
+</dl>
+
+<h2>Uživatelé systému pro testování</h2>
+<p>Uveďte prosím existující zástupce <strong>všech rolí uživatelů</strong>.</p>
+<table>
+<tbody><tr><th>Login</th><th>Heslo</th><th>Role</th></tr>
+<tr><td>admin</td><td>Heslo123</td><td>Administrátor</td></tr>
+<tr><td>user</td><td>Heslo123</td><td>Registrovany uzivatel</td></tr>
+</tbody></table>
+
+<!-- <p>(Diagram případů užití není nutné vkládat, pokud IS implementuje role a případy užití definované zadáním.)</p>  -->
+
+<h3>Video</h3>
+
+<dd><p>Komentovane video k nasmu informacnemu systemu. Vo videu som sa na zaciatku mylil ked som ukazoval zoznamy turnajov, nazyval som to zoznamom zapasov, jednalo sa o slovny preklep.</p></dd>
+<dd><a href="https://drive.google.com/file/d/1NXzTcXzIFWpnhDUz1TQgGkkf_-dn9vju/view">https://drive.google.com/file/d/1NXzTcXzIFWpnhDUz1TQgGkkf_-dn9vju/view</a></dd>
+<!-- <p>Přiložte odkaz na komentované video demostrující použití informačního systému. Zaměřte se na případy užití definované zadáním (např. registrace uživatele, správa uživatelů a činnosti jednotlivých rolí). Video nahrajte například na VUT Google Drive, kde ho bude možné přímo spustit z odkazu.</p>  -->
+
+<h2>Implementace</h2>
+<p>Projekt sme vyvijali pomocou php a frameworku Vue. Oddelene sme vyvijali API a Webovu aplikaciu. Api bolo vyvijane v jazyku php a pristupovalo k databazi pomocou vytvorenych services (oddelene services pre match, team, user a tournament). Kazda service implementovala vlastne funkcie ktora boli pomocou nej volatelne, service pristupovala k databaze pomocou zvacsa predpripravenych procedur. Kontrola ukladania dat do databazy prebiehala pomocou triggerov. Front end pre kazdu stranku bol implementovany osobitne v subore v ktorom sa nachadzalo css html aj java script. Pri vyvoji sme pouzivali aj predom urcene znovu pouzitelne komponenty a takisto sme si pomahali aj javascriptovymi triedami pre rozne druhy dat.</p>
+
+<h3>Databáze</h3>
+
+<pre>
+	Tables:
+	+--------------------+
+	| Tables_in_xdzuri00 |
+	+--------------------+
+	| Matches            |
+	| Participants       |
+	| TeamPlayers        |
+	| Teams              |
+	| Tournaments        |
+	| Users              |
+	+--------------------+
+</pre>
+<pre>
+	Matches:
+	+--------------+-------------+------+-----+---------+----------------+
+	| Field        | Type        | Null | Key | Default | Extra          |
+	+--------------+-------------+------+-----+---------+----------------+
+	| matchID      | int(11)     | NO   | PRI | NULL    | auto_increment |
+	| matchStart   | datetime    | NO   |     | NULL    |                |
+	| partOneID    | int(11)     | YES  | MUL | NULL    |                |
+	| partOneScore | int(11)     | YES  |     | NULL    |                |
+	| partTwoID    | int(11)     | YES  | MUL | NULL    |                |
+	| partTwoScore | int(11)     | YES  |     | NULL    |                |
+	| tnmntRound   | smallint(6) | NO   |     | NULL    |                |
+	| isFinished   | tinyint(4)  | NO   |     | 0       |                |
+	| tnmntID      | int(11)     | NO   | MUL | NULL    |                |
+	+--------------+-------------+------+-----+---------+----------------+
+</pre>
+<pre>
+	Participants:
+	+------------+-------------+------+-----+---------+----------------+
+	| Field      | Type        | Null | Key | Default | Extra          |
+	+------------+-------------+------+-----+---------+----------------+
+	| idTP       | int(11)     | NO   | PRI | NULL    | auto_increment |
+	| tnmntID    | int(11)     | NO   | MUL | NULL    |                |
+	| userID     | int(11)     | YES  | MUL | NULL    |                |
+	| teamID     | int(11)     | YES  | MUL | NULL    |                |
+	| placement  | smallint(6) | YES  |     | NULL    |                |
+	| isApproved | tinyint(4)  | NO   |     | 0       |                |
+	+------------+-------------+------+-----+---------+----------------+
+</pre>
+<pre>
+	Team players:
+	+--------+---------+------+-----+---------+----------------+
+	| Field  | Type    | Null | Key | Default | Extra          |
+	+--------+---------+------+-----+---------+----------------+
+	| id     | int(11) | NO   | PRI | NULL    | auto_increment |
+	| teamID | int(11) | NO   | MUL | NULL    |                |
+	| userID | int(11) | NO   | MUL | NULL    |                |
+	+--------+---------+------+-----+---------+----------------+
+</pre>
+<pre>
+	Teams:
+	+----------+--------------+------+-----+-------------------+----------------+
+	| Field    | Type         | Null | Key | Default           | Extra          |
+	+----------+--------------+------+-----+-------------------+----------------+
+	| teamID   | int(11)      | NO   | PRI | NULL              | auto_increment |
+	| leaderID | int(11)      | NO   | MUL | NULL              |                |
+	| teamName | varchar(50)  | NO   | UNI | NULL              |                |
+	| created  | timestamp    | NO   |     | CURRENT_TIMESTAMP |                |
+	| logoUrl  | varchar(255) | YES  |     | NULL              |                |
+	+----------+--------------+------+-----+-------------------+----------------+
+</pre>
+<pre>
+	Tournaments:
+	+-------------------+-------------+------+-----+---------+----------------+
+	| Field             | Type        | Null | Key | Default | Extra          |
+	+-------------------+-------------+------+-----+---------+----------------+
+	| tnmntID           | int(11)     | NO   | PRI | NULL    | auto_increment |
+	| tnmntName         | varchar(50) | NO   | UNI | NULL    |                |
+	| gameType          | varchar(50) | NO   |     | NULL    |                |
+	| maxParticipants   | smallint(6) | NO   |     | NULL    |                |
+	| isForTeams        | tinyint(4)  | NO   |     | 0       |                |
+	| tnmntStart        | datetime    | NO   |     | NULL    |                |
+	| isFinished        | tinyint(4)  | NO   |     | 0       |                |
+	| creatorID         | int(11)     | NO   | MUL | NULL    |                |
+	| minPlayersPerGame | smallint(6) | NO   |     | 1       |                |
+	| isApproved        | tinyint(4)  | NO   |     | 0       |                |
+	+-------------------+-------------+------+-----+---------+----------------+
+</pre>
+<pre>
+	Users:
+	+----------+--------------+------+-----+-------------------+----------------+
+	| Field    | Type         | Null | Key | Default           | Extra          |
+	+----------+--------------+------+-----+-------------------+----------------+
+	| userID   | int(11)      | NO   | PRI | NULL              | auto_increment |
+	| username | varchar(50)  | NO   | UNI | NULL              |                |
+	| pwd      | varchar(255) | NO   |     | NULL              |                |
+	| created  | timestamp    | NO   |     | CURRENT_TIMESTAMP |                |
+	| isAdmin  | tinyint(4)   | NO   |     | 0                 |                |
+	+----------+--------------+------+-----+-------------------+----------------+
+</pre>
+
+<h2>Instalace</h2>
+
+<!-- Stručně popište: 
+<ul>
+<li>postup instalace na server,</li>
+<li>softwarové požadavky (verze PHP apod.),</li>
+<li>jak rozbalit, konfigurovat, inicializovat databázi, ...</li>
+</ul> -->
+
+<p>Postup instalacie, je nutne spustit si prikaz npm run build ktory vytvori subor index.html, ikonu a zlozku assets so zdrojovymi kodmi</p>
+
+<p>Pre spustenie app je potreba node.js a vue framework. Node.js verzia 8.9, vite 3.1.8, kniznice: axios 1.1.3, element-plus 2.2.21, chart.js 3.9.1, reflect-metadata 0.1.13, vue-router 4.1.6, vue 3.2.41</p>
+
+<p>Databazu mysql sme inicializovali pomocou zdrojovych sql skriptov na skolskom servery eva, takisto sme pridali aj procedury a trigery pomocou predpripravenych suborov. Postupom casu sme si este zaznamenavali prikazy na pouzite zmeny na databaze do suboru update.sql</p>
+
+<h2>Známé problémy</h2>
+<!-- <p>Zde popište, které body zadání nejsou implementovány a z jakého důvodu. Např. &#8222;Z časových důvodů nebyla implementována správa uživatelů.&#8221; Pomůžete tím zrychlit hodnocení, když neimplementované funkce nebudeme muset dlouze hledat.</p> -->
+
+
+
+</body></html>
